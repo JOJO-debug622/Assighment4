@@ -186,5 +186,4 @@ int main() {
 * 生成两个3*3的矩阵，并进行各种运算。
 
 ### * 结果截图：
-![] 
-(https://github.com/JOJO-debug622/Assighment4/blob/main/Assignment4.PNG)
+![](https://github.com/JOJO-debug622/Assighment4/blob/main/Assignment4.PNG)
