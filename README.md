@@ -36,9 +36,10 @@ Matrix::Matrix(int a, int b) : rows(a), columns(b) {
 	m = new float* [rows];
 	for (int i = 0; i < rows; i++) {
 		m[i] = new float[columns];
-		
+		for(int i=0;i<columns;i++){
+                       m[i][j]=1;
 	}
-
+        k=1;
 }
 
 Matrix::Matrix(float** M) : rows(_msize(M)/sizeof(M[0])), columns(_msize(*M)/sizeof(m[0][0])) {
@@ -49,7 +50,7 @@ Matrix::Matrix(float** M) : rows(_msize(M)/sizeof(M[0])), columns(_msize(*M)/siz
 			m[i][j] = M[i][j];
 		}
 	}
-
+        k=2;
 }
 ```
 * 其中Matrix（a，b）生成一个a行b列的矩阵，并初始定义所有元素为0；Matrix（**m）直接生成一个与二维数组相同的矩阵；
@@ -80,7 +81,7 @@ Matrix operator *(const float a,const Matrix& other) {
 		for (int j = 0; j < other.columns; j++) {
 			S.m[i][j] = a * other.m[i][j];
 		}
-	}
+	}S.k++;
 	return S;
 }
 
@@ -90,7 +91,7 @@ Matrix Matrix::operator *(const float a) {
 		for (int j = 0; j < columns; j++) {
 			S.m[i][j] = a * m[i][j];
 		}
-	}
+	}S.k++
 	return S;
 }
 
@@ -101,7 +102,7 @@ Matrix Matrix::operator+(const Matrix& other) {
 			for (int j = 0; j < columns; j++) {
 				S.m[i][j] = this->m[i][j] + other.m[i][j];
 			}
-		}
+		}S.k++
 
 		return S;
 	}
@@ -117,7 +118,7 @@ Matrix Matrix::operator -(const Matrix& other) {
 			for (int j = 0; j < columns; j++) {
 				S.m[i][j] = this->m[i][j] - other.m[i][j];
 			}
-		}
+		}S.k++
 
 		return S;
 	}
@@ -136,7 +137,7 @@ Matrix Matrix::operator *(const Matrix& other) {
 					S.m[i][j] += m[i][a] * other.m[a][j];
 				}
 			}
-		}
+		}S.k++
 
 		return S;
 	}
@@ -145,7 +146,17 @@ Matrix Matrix::operator *(const Matrix& other) {
 	}
 }
 ```
-
+### * 析构函数：
+```cpp
+Matrix::~Matrix() {
+	if (k > 1) {
+		k--;
+	}
+	else if (k == 1) {
+		delete[] m;
+	}
+}
+```
 ### * 主程序：
 ```cpp
 int main() {
