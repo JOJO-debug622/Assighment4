@@ -1,12 +1,13 @@
 # Assighment4：Matrix
-====
-功能：
------
+
+## 功能：
+
 * 使用class来定义储存Matrix的行数、列数和元素。
 * 重新定义运算符号+、-、*、=。
 -----
 代码：
-* ###class：
+
+### * class：
 ```cpp
 class Matrix {
 private:
@@ -29,7 +30,7 @@ public:
 
 };
 ```
-* ###构造函数：
+### * 构造函数：
 ```cpp
 Matrix::Matrix(int a, int b) : rows(a), columns(b) {
 	m = new float* [rows];
@@ -52,7 +53,7 @@ Matrix::Matrix(float** M) : rows(_msize(M)/sizeof(M[0])), columns(_msize(*M)/siz
 }
 ```
 * 其中Matrix（a，b）生成一个a行b列的矩阵，并初始定义所有元素为0；Matrix（**m）直接生成一个与二维数组相同的矩阵；
-* ###重载符号：
+### * 重载符号：
 ```cpp
 std::ostream& operator <<(std::ostream& os, const Matrix& other) {
 	os << other.rows << "*" << other.columns << "矩阵：" << endl;
@@ -145,7 +146,7 @@ Matrix Matrix::operator *(const Matrix& other) {
 }
 ```
 
-* ###主程序：
+### * 主程序：
 ```cpp
 int main() {
 	
